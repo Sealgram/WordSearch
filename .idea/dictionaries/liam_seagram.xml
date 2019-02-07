@@ -2,25 +2,35 @@
   <dictionary name="liam_seagram">
     <words>
       <w>appendword</w>
+      <w>areyousure</w>
+      <w>asciiart</w>
       <w>chosenword</w>
       <w>chosenwords</w>
       <w>createtable</w>
       <w>easywords</w>
       <w>forbiddenyvalues</w>
+      <w>hardwords</w>
+      <w>highjack</w>
+      <w>interfaceing</w>
       <w>isitbackwards</w>
       <w>letteramount</w>
       <w>listofnums</w>
       <w>mediumwords</w>
+      <w>minigame</w>
       <w>morewords</w>
+      <w>numberlist</w>
       <w>nvidia</w>
       <w>rangecommandfile</w>
       <w>rangecommands</w>
       <w>rangeses</w>
       <w>sidelength</w>
+      <w>timesguessed</w>
       <w>usedindexes</w>
       <w>wordamount</w>
       <w>wordchoices</w>
       <w>wordlen</w>
+      <w>wordsguessed</w>
+      <w>wordsleft</w>
     </words>
   </dictionary>
 </component>
