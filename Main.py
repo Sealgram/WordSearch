@@ -83,14 +83,14 @@ def numberlist(sidelength, positive, negative):
 
 
 def guessing(wordchoices, wordamount):
-    timesguessed = 1
+    timesguessed = 0
     wordsguessed = 0
     wordchoices = list(wordchoices)
     while wordsguessed != wordamount:
         print('\nWhat is your word guess')
         guess = input('>>>')
         if guess in wordchoices:
-            print('\nYou guess a word correctly!')
+            print('\nYou have guessed a word correctly!')
             wordsguessed += 1
             timesguessed += 1
             wordchoices.remove(guess)
@@ -137,7 +137,7 @@ def hardness(type):
         return wordchoices
 
 
-def interfaceing():
+def interfacing():
     print('welcome to...\n')
     time.sleep(0.5)
     asciiart()
@@ -183,4 +183,4 @@ def interfaceing():
             print('That was not one of the options!\n')
 
 
-interfaceing()
+interfacing()
