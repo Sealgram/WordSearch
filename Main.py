@@ -131,116 +131,202 @@ def createtable(listofnums, wordamount, letteramount, sidelength, difficulty):
     # will appear in the table.
 
 
+'''
+The following function makes the list of possible indexes that can be used when putting words into the list that
+forms my word search table. 
+'''
+
+
 def numberlist(sidelength, positive, negative):
+    # Function is defined with necessary parameters
     listofnums = []
+    # empty listofnums is defined
     y = 0
+    # y is defined as zero, to be changed with each loop through the function
     for x in range(0, sidelength):
+        # uses the size of the table as the first range repeat
         for l in range(0, positive):
+            # uses the second parameter, positive, as the second range repeat
             listofnums.append(y)
+            # appends the y value to the listofnums
             y += 1
+            # brings the y value up with each loop
         y += negative
+        # skips the values that are not allowed to be inserted in the list, then runs through the loop again
     return listofnums
+    # returns the completed listofnums
+
+
+'''
+The following function is the guessing function, and it is what allows the user to guess the values in the word search
+and confirms or denies if their guess is true based on the functions parameters.
+'''
 
 
 def guessing(wordchoices, wordamount):
+    # Function is defined with proper parameters
     timesguessed = 0
     wordsguessed = 0
+    # needed variables are defined
     wordchoices = list(wordchoices)
+    # wordchoices is redefined as a list
     while wordsguessed != wordamount:
+        # while loop that all the guessing is contained inside
         print('\nWhat is your word guess')
         guess = input('>>>')
+        # user guess is inputted
         if guess in wordchoices:
             print('\nYou have guessed a word correctly!')
+            # if guess is correct, informs the user that they guessed correctly
             wordsguessed += 1
             timesguessed += 1
+            # brings wordsguessed and timesguessed up by one for this iteration of the loop
             wordchoices.remove(guess)
+            # removes the guessed word from the wordchoices list
             wordsleft = len(wordchoices)
             print(f'You have {wordsleft} words left to guess.\n')
+            # finds the amount of words left and informs the user
         elif guess == 'quit':
-            areyousure = input('\nAre you sure you want to quit? (y/n): ')
-            if areyousure.lower == 'y':
+            areyousure = input('Are you sure you want to quit? (y/n): ')
+            # if the user inputs 'quit', asks them again if they are sure
+            if areyousure.lower() == 'y':
                 print('\nThanks for playing!\n')
-                break
+                quit()
+                # quits the code if they want to quit
             else:
                 continue
+                # continues the loop if they dont want to quit
         else:
             print('\nThat was not a correct guess, try again!')
             timesguessed += 1
             print('times guessed:', timesguessed)
             continue
+            # if the user guesses wrong, informs them so and adds one to timesguessed.
+
+
+'''
+The following function calls the createtable function based on what difficulty the user has selected and inputs
+the proper parameters to create the correct table
+'''
 
 
 def hardness(type):
+    # defines the function with the parameter for the proper mode
     if type == 'easy':
+        # if statement if the function is called with the type 'easy'
         listofnums = numberlist(7, 3, 4)
+        # defines listofnums as the numberlist function with the correct parameters
         wordamount = 5
         letteramount = 49
         sidelength = 7
         difficulty = 'easywords.txt'
+        # defines the proper parameters for the specified mode
         wordchoices = createtable(listofnums, wordamount, letteramount, sidelength, difficulty)
+        # calls the createtable function with the proper parameters for the specified mode, and gets the returned
+        # list of words to be returned
         return wordchoices
     elif type == 'medium':
+        # elif statement if the function is called with the type 'medium'
         listofnums = numberlist(10, 5, 5)
+        # defines listofnums as the numberlist function with the correct parameters
         wordamount = 10
         letteramount = 100
         sidelength = 10
         difficulty = 'mediumwords.txt'
+        # defines the proper parameters for the specified mode
         wordchoices = createtable(listofnums, wordamount, letteramount, sidelength, difficulty)
+        # calls the createtable function with the proper parameters for the specified mode, and gets the returned
+        # list of words to be returned
         return wordchoices
     elif type == 'hard':
+        # elif statement if the function is called with the type 'hard'
         listofnums = numberlist(15, 7, 8)
+        # defines listofnums as the numberlist function with the correct parameters
         wordamount = 15
         letteramount = 225
         sidelength = 15
         difficulty = 'hardwords.txt'
+        # defines the proper parameters for the specified mode
         wordchoices = createtable(listofnums, wordamount, letteramount, sidelength, difficulty)
+        # calls the createtable function with the proper parameters for the specified mode, and gets the returned
+        # list of words to be returned
         return wordchoices
 
 
+'''
+The following function is the main way that the user interacts with my program, and it is the only function that you
+need to call in order to run the code. it informs the user all about the game, and calls all the proper functions
+in the correct order for the game to run functionally.
+'''
+
+
 def interfacing():
-    print('welcome to...\n')
+    print('Welcome to...\n')
     time.sleep(0.5)
     asciiart()
     print('\nBy Liam Seagram\n\n')
+    # prints the welcome screen with the ascii art function
     time.sleep(0.5)
     print('There are 3 difficulties to this minigame: Easy, Medium, and Hard.\n')
     time.sleep(0.5)
     print('In easy mode, you will be presented with a 7x7 of letters that includes 5 words, each with a max length of '
           '5 letters.\n')
     time.sleep(1)
-    print('In medium mode, you will be presented with a 10x10 of letters that includes 10 words, each with a max'
+    print('In medium mode, you will be presented with a 10x10 of letters that includes 10 words, each with a max '
           'length of 6 letters.\n')
     time.sleep(1)
-    print('In hard mode, you will be presented with a 15x15 fo letters that includes 15 words, each with a max'
+    print('In hard mode, you will be presented with a 15x15 fo letters that includes 15 words, each with a max '
           'length of eight characters.\n')
     time.sleep(1)
-    print('Words may appear reversed, and the length of words will vary\n')
+    print('Words may appear reversed, and the length of words will vary.\n')
     time.sleep(1)
+    # Informs the user about the game's modes, and how it works
     while True:
+        # infinite while loop that can be broken with 'break'
         print('\nWhat mode would you like to play? you may also quit the program at any time by inputting "quit".')
         response = input('(Easy, Medium, Hard, Quit): ')
+        # gets the users's input on what mode they desire to play, they may also input 'quit'
         if response.lower() == 'easy':
+            # if statement if the user inputs 'easy'
             print('\n  Generating easy table... \n')
             time.sleep(0.5)
+            # informs the user that an easy table is being generated
             wordchoices = hardness('easy')
+            # generates the table with the appropriate function call
             guessing(wordchoices, 5)
+            # runs the guessing module with the proper parameters so the user can play the created word search
             print("\n Congratulations, you have completed an easy mode table!\n")
+            # once the module has completed its course, informs the user that they have completed the word search
         elif response.lower() == 'medium':
+            # elif statement if the user inputs 'medium'
             print('\n  Generating medium table... \n')
             time.sleep(0.5)
+            # informs the user that a medium table is being generated
             wordchoices = hardness('medium')
+            # generates the table with the appropriate function call
             guessing(wordchoices, 10)
+            # runs the guessing module with the proper parameters so the user can play the created word search
             print("\n Congratulations, you have completed a medium mode table!\n")
+            # once the module has completed its course, informs the user that they have completed the word search
         elif response.lower() == 'hard':
+            # elif statement if the user inputs 'hard'
             print('\n  Generating hard table... \n')
             time.sleep(0.5)
+            # informs the user that a hard table is being generated
             wordchoices = hardness('hard')
+            # generates the table with the appropriate function call
             guessing(wordchoices, 15)
+            # runs the guessing module with the proper parameters so the user can play the created word search
+            print("\n Congratulations, you have completed a hard mode table!\n")
         elif response.lower() == 'quit':
+            # elif statement for if the user inputs 'quit'
             print('\nThanks for playing!\n')
             break
+            # breaks the infinite loop
         else:
             print('That was not one of the options!\n')
+            # defensive programming for if the user inputs something that was not one of the options
 
 
 interfacing()
+# calls the interfacing function
